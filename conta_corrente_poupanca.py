@@ -42,6 +42,10 @@ class ContaPoupanca(ContaCorrente):
     super().__init__(numero, saldo)
     self._tx_juros = tx_juros
 
+  @property
+  def tx_juros(self):
+    return self._tx_juros
+
   def render_juros(self):
     if self._saldo != 0:
       self._saldo += ((self._tx_juros/100)*self._saldo)
@@ -57,6 +61,10 @@ class ContaImposto(ContaCorrente):
   def __init__(self, numero, percentual_imposto, saldo=0):
     super().__init__(numero, saldo)
     self._percentual_imposto = percentual_imposto
+  
+  @property
+  def percentual_imposto(self):
+    return self._percentual_imposto
   
   
   def calcula_imposto(self):
@@ -106,8 +114,10 @@ c2_ci.transferir(10000, c1_cc)
 print(c2_ci.saldo)
 print(c1_ci.saldo)
 c1_ci.calcula_imposto()
+print(c1_ci.percentual_imposto)
 print(c1_ci)
 print(c2_ci)
+print(f'{c1_cp.tx_juros}%')
 
 
 
